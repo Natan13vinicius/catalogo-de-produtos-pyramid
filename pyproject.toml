@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[project]
+name = "mycatalog"
+version = "0.1.0"
+description = "Catálogo de produtos (Pyramid + SQLite)"
+requires-python = ">=3.10"
+dependencies = [
+  "pyramid>=2.0",
+  "pyramid-jinja2",
+  "SQLAlchemy>=2.0",
+  "waitress",
+]
+
+[project.entry-points."paste.app_factory"]
+main = "mycatalog:main"

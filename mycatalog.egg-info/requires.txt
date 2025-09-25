@@ -1,0 +1,4 @@
+pyramid>=2.0
+pyramid-jinja2
+SQLAlchemy>=2.0
+waitress

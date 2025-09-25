@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: mycatalog
+Version: 0.1.0
+Summary: Catálogo de produtos (Pyramid + SQLite)
+Requires-Python: >=3.10
+Requires-Dist: pyramid>=2.0
+Requires-Dist: pyramid-jinja2
+Requires-Dist: SQLAlchemy>=2.0
+Requires-Dist: waitress
