@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Produto</title>
+</head>
+<body>
+    <h1>Excluir Produto</h1>
+    <p>Tem certeza que deseja excluir <strong>{{ product.name }}</strong>?</p>
+    <form method="post" action="{{ request.route_url('product_delete', id=product.id) }}">
+        <button type="submit">❌ Confirmar Exclusão</button>
+    </form>
+    <a href="{{ request.route_url('home') }}">⬅ Cancelar</a>
+</body>
+</html>

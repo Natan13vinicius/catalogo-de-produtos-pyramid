@@ -1,20 +1,19 @@
 import os
 from pyramid.config import Configurator
 from pyramid.session import SignedCookieSessionFactory
-from sqlalchemy import create_engine
+from sqlalchemy import engine_from_config
 from sqlalchemy.orm import scoped_session, sessionmaker
+import zope.sqlalchemy
 
-from .models import Base
-
-# Sessão global do SQLAlchemy
-DBSession = scoped_session(sessionmaker())
+from .models import Base, DBSession
 
 def main(global_config, **settings):
     """Função principal WSGI, chamada pelo Pyramid"""
-    # Conexão com banco SQLite
-    db_url = settings.get("sqlalchemy.url", "sqlite:///var/catalog.db")
-    engine = create_engine(db_url, future=True)
+
+    # Conexão com banco SQLite (usa engine_from_config para ler do .ini)
+    engine = engine_from_config(settings, "sqlalchemy.")
     DBSession.configure(bind=engine)
+    zope.sqlalchemy.register(DBSession)
     Base.metadata.create_all(engine)
 
     # Diretório de uploads

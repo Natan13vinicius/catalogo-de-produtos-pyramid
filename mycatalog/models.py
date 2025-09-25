@@ -1,14 +1,21 @@
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Text, Numeric
+from sqlalchemy import Column, Integer, String, Text, Numeric
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, sessionmaker
+import zope.sqlalchemy
 
-class Base(DeclarativeBase):
-    pass
+# Base do SQLAlchemy
+Base = declarative_base()
 
+# Sessão global do SQLAlchemy
+DBSession = scoped_session(sessionmaker())
+zope.sqlalchemy.register(DBSession)
+
+# Modelo de Produto
 class Product(Base):
     __tablename__ = "products"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(200), nullable=False)
-    description: Mapped[str] = mapped_column(Text, nullable=False)
-    price: Mapped[float] = mapped_column(Numeric(10, 2), nullable=False)
-    image_path: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(200), nullable=False)
+    description = Column(Text, nullable=False)
+    price = Column(Numeric(10, 2), nullable=False)
+    image_path = Column(String(255), nullable=True)
