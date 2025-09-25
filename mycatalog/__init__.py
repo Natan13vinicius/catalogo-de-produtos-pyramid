@@ -38,10 +38,12 @@ def main(global_config, **settings):
 
     # Rotas da aplicação
     config.add_route("home", "/")
-    config.add_route("product_add", "/products/add")
-    config.add_route("product_detail", "/products/{id}")
-    config.add_route("product_edit", "/products/{id}/edit")
-    config.add_route("product_delete", "/products/{id}/delete")
+    config.add_route("list_products", "/products") 
+    config.add_route("add_product", "/products/add")
+    # rota que ainda nao foi criada,descomentar depoi
+    # config.add_route("product_detail", "/products/{id}")
+    config.add_route("edit_product", "/products/{id}/edit")
+    config.add_route("delete_product", "/products/{id}/delete")
 
     # Escanear as views (controllers)
     config.scan(".views")

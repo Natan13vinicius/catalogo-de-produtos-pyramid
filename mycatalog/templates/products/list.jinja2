@@ -6,21 +6,25 @@
 </head>
 <body>
     <h1>Catálogo de Produtos</h1>
-    <a href="{{ request.route_url('product_add') }}">➕ Adicionar Produto</a>
+    <a href="{{ request.route_url('add_product') }}">➕ Adicionar Produto</a>
     <ul>
-        {% for p in products %}
-            <li>
-                <strong>{{ p.name }}</strong> - R$ {{ "%.2f"|format(p.price) }}
-                <br>{{ p.description }}
-                <br>
-                {% if p.image_path %}
-                    <img src="{{ request.static_url('mycatalog:static/uploads/' ~ p.image_path) }}" width="100">
-                {% endif %}
-                <br>
-                <a href="{{ request.route_url('product_edit', id=p.id) }}">✏️ Editar</a> |
-                <a href="{{ request.route_url('product_delete', id=p.id) }}">❌ Excluir</a>
-            </li>
-        {% endfor %}
+        {% if products %}
+            {% for p in products %}
+                <li>
+                    <strong>{{ p.name }}</strong> - R$ {{ "%.2f"|format(p.price) }}
+                    <br>{{ p.description }}
+                    <br>
+                    {% if p.image_path %}
+                        <img src="{{ request.static_url('mycatalog:static/uploads/' ~ p.image_path) }}" width="100">
+                    {% endif %}
+                    <br>
+                    <a href="{{ request.route_url('edit_product', id=p.id) }}">✏️ Editar</a> |
+                    <a href="{{ request.route_url('delete_product', id=p.id) }}">❌ Excluir</a>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>Nenhum produto cadastrado ainda.</li>
+        {% endif %}
     </ul>
 </body>
 </html>

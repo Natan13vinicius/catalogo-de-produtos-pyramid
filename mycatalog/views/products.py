@@ -3,13 +3,13 @@ from pyramid.httpexceptions import HTTPFound
 from ..models import DBSession, Product
 
 # 📌 Listar produtos
-@view_config(route_name="list_products", renderer="templates/products/list.jinja2")
+@view_config(route_name="list_products", renderer="mycatalog:templates/products/list.jinja2")
 def list_products(request):
     produtos = DBSession.query(Product).all()
     return {"products": produtos}
 
 # 📌 Exibir formulário de adicionar produto
-@view_config(route_name="add_product", renderer="templates/products/add.jinja2", request_method="GET")
+@view_config(route_name="add_product", renderer="mycatalog:templates/products/add.jinja2", request_method="GET")
 def add_product_form(request):
     return {}
 
@@ -27,13 +27,13 @@ def add_product(request):
         DBSession.add(novo_produto)
         DBSession.commit()
         # 🔄 Redireciona para a lista de produtos
-        return HTTPFound(location=request.route_url("home"))
+        return HTTPFound(location=request.route_url("list_products"))
     except Exception as e:
         DBSession.rollback()
         return {"status": "error", "message": str(e)}
 
 # 📌 Exibir formulário de edição
-@view_config(route_name="edit_product", renderer="templates/products/edit.jinja2", request_method="GET")
+@view_config(route_name="edit_product", renderer="mycatalog:templates/products/edit.jinja2", request_method="GET")
 def edit_product_form(request):
     product_id = int(request.matchdict["id"])
     produto = DBSession.query(Product).get(product_id)
@@ -57,13 +57,13 @@ def edit_product(request):
 
         DBSession.commit()
         # 🔄 Redireciona para a lista de produtos
-        return HTTPFound(location=request.route_url("home"))
+        return HTTPFound(location=request.route_url("list_products"))
     except Exception as e:
         DBSession.rollback()
         return {"status": "error", "message": str(e)}
 
 # 📌 Exibir confirmação de exclusão
-@view_config(route_name="delete_product", renderer="templates/products/delete.jinja2", request_method="GET")
+@view_config(route_name="delete_product", renderer="mycatalog:templates/products/delete.jinja2", request_method="GET")
 def delete_product_form(request):
     product_id = int(request.matchdict["id"])
     produto = DBSession.query(Product).get(product_id)
@@ -82,7 +82,7 @@ def delete_product(request):
         DBSession.delete(produto)
         DBSession.commit()
         # 🔄 Redireciona para a lista de produtos
-        return HTTPFound(location=request.route_url("home"))
+        return HTTPFound(location=request.route_url("list_products"))
     except Exception as e:
         DBSession.rollback()
         return {"status": "error", "message": str(e)}
