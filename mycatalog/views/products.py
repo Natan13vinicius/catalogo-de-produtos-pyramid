@@ -2,6 +2,11 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from ..models import DBSession, Product
 
+# 📌 Página inicial
+@view_config(route_name="home", renderer="mycatalog:templates/home.jinja2")
+def home_view(request):
+    return {"message": "Bem-vindo ao Catálogo de Produtos!"}
+
 # 📌 Listar produtos
 @view_config(route_name="list_products", renderer="mycatalog:templates/products/list.jinja2")
 def list_products(request):
@@ -26,7 +31,6 @@ def add_product(request):
         )
         DBSession.add(novo_produto)
         DBSession.commit()
-        # 🔄 Redireciona para a lista de produtos
         return HTTPFound(location=request.route_url("list_products"))
     except Exception as e:
         DBSession.rollback()
@@ -56,7 +60,6 @@ def edit_product(request):
         produto.image_path = data.get("image_path", produto.image_path)
 
         DBSession.commit()
-        # 🔄 Redireciona para a lista de produtos
         return HTTPFound(location=request.route_url("list_products"))
     except Exception as e:
         DBSession.rollback()
@@ -81,7 +84,6 @@ def delete_product(request):
 
         DBSession.delete(produto)
         DBSession.commit()
-        # 🔄 Redireciona para a lista de produtos
         return HTTPFound(location=request.route_url("list_products"))
     except Exception as e:
         DBSession.rollback()

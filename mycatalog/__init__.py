@@ -2,7 +2,6 @@ import os
 from pyramid.config import Configurator
 from pyramid.session import SignedCookieSessionFactory
 from sqlalchemy import engine_from_config
-from sqlalchemy.orm import scoped_session, sessionmaker
 import zope.sqlalchemy
 
 from .models import Base, DBSession
@@ -40,12 +39,10 @@ def main(global_config, **settings):
     config.add_route("home", "/")
     config.add_route("list_products", "/products") 
     config.add_route("add_product", "/products/add")
-    # rota que ainda nao foi criada,descomentar depoi
-    # config.add_route("product_detail", "/products/{id}")
     config.add_route("edit_product", "/products/{id}/edit")
     config.add_route("delete_product", "/products/{id}/delete")
 
-    # Escanear as views (controllers)
+    # Escanear as views
     config.scan(".views")
 
     return config.make_wsgi_app()

@@ -1,6 +1,7 @@
 pyproject.toml
 setup.py
 mycatalog/__init__.py
+mycatalog/models.py
 mycatalog.egg-info/PKG-INFO
 mycatalog.egg-info/SOURCES.txt
 mycatalog.egg-info/dependency_links.txt
