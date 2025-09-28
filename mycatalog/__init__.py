@@ -6,8 +6,14 @@ import zope.sqlalchemy
 
 from .models import Base, DBSession
 
+
 def main(global_config, **settings):
     """Função principal WSGI, chamada pelo Pyramid"""
+
+    # 🔹 Garantir que a pasta 'var/' exista antes de usar o banco
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    var_dir = os.path.join(project_root, "var")
+    os.makedirs(var_dir, exist_ok=True)
 
     # Conexão com banco SQLite (usa engine_from_config para ler do .ini)
     engine = engine_from_config(settings, "sqlalchemy.")
@@ -37,7 +43,7 @@ def main(global_config, **settings):
 
     # Rotas da aplicação
     config.add_route("home", "/")
-    config.add_route("list_products", "/products") 
+    config.add_route("list_products", "/products")
     config.add_route("add_product", "/products/add")
     config.add_route("edit_product", "/products/{id}/edit")
     config.add_route("delete_product", "/products/{id}/delete")
