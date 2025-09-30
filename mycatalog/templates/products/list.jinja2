@@ -1,30 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Catálogo de Produtos</title>
+    <title>Lista de Produtos</title>
+    <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-    <h1>Catálogo de Produtos</h1>
-    <a href="{{ request.route_url('add_product') }}">➕ Adicionar Produto</a>
-    <ul>
-        {% if products %}
-            {% for p in products %}
-                <li>
-                    <strong>{{ p.name }}</strong> - R$ {{ "%.2f"|format(p.price) }}
-                    <br>{{ p.description }}
-                    <br>
-                    {% if p.image_path %}
-                        <img src="{{ request.static_url('mycatalog:static/uploads/' ~ p.image_path) }}" width="100">
+    <h1>📦 Lista de Produtos</h1>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{{ request.route_url('home') }}" class="button">🏠 Home</a>
+        <a href="{{ request.route_url('add_product') }}" class="button">➕ Adicionar Produto</a>
+    </div>
+
+    {% if products %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>R$ {{ "%.2f"|format(product.price) }}</td>
+                <td>
+                    {% if product.image_path %}
+                        <img src="{{ request.static_url('mycatalog:static/uploads/' ~ product.image_path) }}" width="60">
+                    {% else %}
+                        -
                     {% endif %}
-                    <br>
-                    <a href="{{ request.route_url('edit_product', id=p.id) }}">✏️ Editar</a> |
-                    <a href="{{ request.route_url('delete_product', id=p.id) }}">❌ Excluir</a>
-                </li>
+                </td>
+                <td>
+                    <a href="{{ request.route_url('edit_product', id=product.id) }}" class="btn edit">✏️ Editar</a>
+                    <a href="{{ request.route_url('delete_product', id=product.id) }}" class="btn delete">🗑️ Excluir</a>
+                </td>
+            </tr>
             {% endfor %}
-        {% else %}
-            <li>Nenhum produto cadastrado ainda.</li>
-        {% endif %}
-    </ul>
+        </tbody>
+    </table>
+    {% else %}
+    <p style="text-align: center;">Nenhum produto cadastrado.</p>
+    {% endif %}
 </body>
 </html>

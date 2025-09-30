@@ -3,44 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Catálogo de Produtos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            color: #1d4ba7;
-        }
-        p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-        a.button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-            background-color: #1d4ba7;
-            border-radius: 6px;
-            transition: background 0.3s ease;
-        }
-        a.button:hover {
-            background-color: #163b82;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
     <h1>{{ message }}</h1>
-    <p>Bem-vindo ao sistema de gerenciamento de produtos.</p>
-    <a href="{{ request.route_url('list_products') }}" class="button">📦 Ver Produtos</a>
+    <p style="text-align: center;">Bem-vindo ao sistema de gerenciamento de produtos.</p>
+    <div style="text-align: center;">
+        <a href="{{ request.route_url('list_products') }}" class="button">📦 Ver Produtos</a>
+        <a href="{{ request.route_url('add_product') }}" class="button">➕ Adicionar Produto</a>
+    </div>
 </body>
 </html>

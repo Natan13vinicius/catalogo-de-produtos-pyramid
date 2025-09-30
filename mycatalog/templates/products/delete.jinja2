@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Excluir Produto</title>
+    <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-    <h1>Excluir Produto</h1>
-    <p>Tem certeza que deseja excluir <strong>{{ product.name }}</strong>?</p>
-    <form method="post" action="{{ request.route_url('product_delete', id=product.id) }}">
-        <button type="submit">❌ Confirmar Exclusão</button>
-    </form>
-    <a href="{{ request.route_url('home') }}">⬅ Cancelar</a>
+    <div class="confirm-box">
+        <h1>⚠️ Excluir Produto</h1>
+        <p>Tem certeza que deseja excluir o produto <strong>{{ product.name }}</strong>?</p>
+
+        <form method="POST">
+            <button type="submit" class="btn delete">🗑️ Confirmar Exclusão</button>
+            <a href="{{ request.route_url('list_products') }}" class="btn edit">Cancelar</a>
+        </form>
+    </div>
 </body>
 </html>
