@@ -7,7 +7,7 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #000;
+  background: linear-gradient(90deg, #000000, #aedd2b);
   color: #000;
   line-height: 1.6;
   min-height: 100vh;
@@ -17,7 +17,7 @@ body {
 
 /* ====== HEADER ====== */
 header {
-  background: linear-gradient(90deg, #000000, #aedd2b);
+  background: black;
   color: #fff;
   padding: 15px 20px;
   display: flex;
