@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Excluir Produto</title>
-    <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Excluir Produto</title>
+  <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-    <div class="confirm-box">
-        <h1>⚠️ Excluir Produto</h1>
-        <p>Tem certeza que deseja excluir o produto <strong>{{ product.name }}</strong>?</p>
+  <header>
+    <h1>Excluir Produto</h1>
+    <nav>
+      <a href="{{ request.route_url('home') }}">Início</a>
+      <a href="{{ request.route_url('list_products') }}">Produtos</a>
+    </nav>
+  </header>
 
-        <form method="POST">
-            <button type="submit" class="btn delete">🗑️ Confirmar Exclusão</button>
-            <a href="{{ request.route_url('list_products') }}" class="btn edit">Cancelar</a>
-        </form>
-    </div>
+  <main>
+    <p>Tem certeza que deseja excluir o produto <strong>{{ product.name }}</strong> (ID {{ product.id }})?</p>
+
+    <form method="post" action="{{ request.route_url('delete_product', id=product.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
+      <button class="btn btn-danger" type="submit">🗑️ Excluir</button>
+      <a class="btn" href="{{ request.route_url('list_products') }}">Cancelar</a>
+    </form>
+  </main>
+
+  <footer>
+    <small>Projeto acadêmico · Pyramid + SQLAlchemy</small>
+  </footer>
 </body>
 </html>

@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Adicionar Produto</title>
-    <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Adicionar Produto</title>
+  <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-    <h1>➕ Adicionar Produto</h1>
-    <form method="POST">
-        <label>Nome:</label>
-        <input type="text" name="name" required>
+  <header>
+    <h1>Adicionar Produto</h1>
+    <nav>
+      <a href="{{ request.route_url('home') }}">Início</a>
+      <a href="{{ request.route_url('list_products') }}">Produtos</a>
+    </nav>
+  </header>
 
-        <label>Descrição:</label>
-        <textarea name="description" required></textarea>
+  <main>
+    <form method="post" action="{{ request.route_url('add_product') }}">
+      <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
 
-        <label>Preço:</label>
-        <input type="number" step="0.01" name="price" required>
+      <label for="name">Nome:</label>
+      <input id="name" name="name" type="text" required />
 
-        <label>Imagem (nome do arquivo):</label>
-        <input type="text" name="image_path">
+      <label for="description">Descrição:</label>
+      <textarea id="description" name="description" required></textarea>
 
-        <button type="submit">Salvar</button>
+      <label for="price">Preço:</label>
+      <input id="price" name="price" type="number" step="0.01" required />
+
+      <label for="image_path">Imagem (nome do arquivo na pasta uploads/):</label>
+      <input id="image_path" name="image_path" type="text" placeholder="ex.: teclado.jpg" />
+
+      <button class="btn" type="submit">Salvar</button>
+      <a class="btn" href="{{ request.route_url('list_products') }}">↩ Voltar</a>
     </form>
+  </main>
 
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="{{ request.route_url('list_products') }}" class="button">📦 Voltar</a>
-    </div>
+  <footer>
+    <small>Projeto acadêmico · Pyramid + SQLAlchemy</small>
+  </footer>
 </body>
 </html>

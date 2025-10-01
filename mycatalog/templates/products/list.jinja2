@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Lista de Produtos</title>
-    <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Lista de Produtos</title>
+  <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-    <h1>📦 Lista de Produtos</h1>
+  <header>
+    <h1>Produtos</h1>
+    <nav>
+      <a href="{{ request.route_url('home') }}">Início</a>
+      <a href="{{ request.route_url('add_product') }}">Adicionar</a>
+    </nav>
+  </header>
 
-    <div style="text-align: center; margin-bottom: 20px;">
-        <a href="{{ request.route_url('home') }}" class="button">🏠 Home</a>
-        <a href="{{ request.route_url('add_product') }}" class="button">➕ Adicionar Produto</a>
-    </div>
+  <main>
+    <h2>📦 Lista de Produtos</h2>
 
     {% if products %}
-    <table>
+      <table>
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Imagem</th>
-                <th>Ações</th>
-            </tr>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+          </tr>
         </thead>
         <tbody>
-            {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>R$ {{ "%.2f"|format(product.price) }}</td>
-                <td>
-                    {% if product.image_path %}
-                        <img src="{{ request.static_url('mycatalog:static/uploads/' ~ product.image_path) }}" width="60">
-                    {% else %}
-                        -
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{{ request.route_url('edit_product', id=product.id) }}" class="btn edit">✏️ Editar</a>
-                    <a href="{{ request.route_url('delete_product', id=product.id) }}" class="btn delete">🗑️ Excluir</a>
-                </td>
-            </tr>
-            {% endfor %}
+        {% for product in products %}
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td style="text-align:left">{{ product.description }}</td>
+            <td>R$ {{ "%.2f"|format(product.price) }}</td>
+            <td>
+              {% if product.image_path %}
+                <img src="{{ request.static_url('mycatalog:static/uploads/' ~ product.image_path) }}" alt="Imagem" />
+              {% else %}-{% endif %}
+            </td>
+            <td>
+              <a class="btn" href="{{ request.route_url('edit_product', id=product.id) }}">✏️ Editar</a>
+              <a class="btn btn-danger" href="{{ request.route_url('delete_product', id=product.id) }}">🗑️ Excluir</a>
+            </td>
+          </tr>
+        {% endfor %}
         </tbody>
-    </table>
+      </table>
     {% else %}
-    <p style="text-align: center;">Nenhum produto cadastrado.</p>
+      <p>Nenhum produto cadastrado.</p>
+      <a class="btn" href="{{ request.route_url('add_product') }}">➕ Cadastrar primeiro produto</a>
     {% endif %}
+  </main>
+
+  <footer>
+    <small>Projeto acadêmico · Pyramid + SQLAlchemy</small>
+  </footer>
 </body>
 </html>

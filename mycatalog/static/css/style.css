@@ -7,8 +7,8 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f6f9;
-  color: #333;
+  background: linear-gradient(to bottom, #ffffff, #f4f6f9);
+  color: #000;
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
@@ -17,28 +17,31 @@ body {
 
 /* ====== HEADER ====== */
 header {
-  background: #1d4ba7;
-  color: white;
+  background: linear-gradient(90deg, #000000, #aedd2b);
+  color: #fff;
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 
 header nav a {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  margin-left: 15px;
+  margin-left: 20px;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
 }
 
 header nav a:hover {
-  color: #ffdd57;
+  color: #aedd2b;
+  transform: scale(1.05);
 }
 
 /* ====== MAIN ====== */
@@ -46,44 +49,60 @@ main {
   flex: 1;
   padding: 20px;
   max-width: 900px;
-  margin: 20px auto;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ====== FOOTER ====== */
 footer {
-  background: #1d4ba7;
+  background: linear-gradient(90deg, #aedd2b, #000000);
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 12px;
   font-size: 0.9rem;
 }
 
 /* ====== BUTTONS ====== */
 .btn {
   display: inline-block;
-  background: #1d4ba7;
-  color: white;
-  padding: 8px 15px;
-  margin-top: 10px;
-  border-radius: 6px;
+  background: #aedd2b;
+  color: #000;
+  padding: 10px 18px;
+  margin-top: 12px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
 .btn:hover {
-  background: #163b82;
+  background: #000;
+  color: #fff;
+  transform: translateY(-2px) scale(1.05);
 }
 
 .btn-danger {
   background: #e63946;
+  color: #fff;
 }
 
 .btn-danger:hover {
   background: #b71c1c;
+  transform: translateY(-2px);
 }
 
 /* ====== TABLE ====== */
@@ -91,51 +110,64 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 table th,
 table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px;
   text-align: center;
 }
 
 table th {
-  background: #1d4ba7;
-  color: white;
+  background: #aedd2b;
+  color: #000;
+  font-weight: bold;
 }
 
 table tr:nth-child(even) {
   background: #f9f9f9;
 }
 
+table tr:hover {
+  background: #f1f1f1;
+  transition: background 0.3s ease;
+}
+
 table img {
   border-radius: 6px;
+  max-width: 80px;
 }
 
 /* ====== FORMS ====== */
 form {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 form label {
-  margin-top: 10px;
   font-weight: bold;
+  margin-top: 8px;
+  text-align: left;
 }
 
 form input,
 form textarea {
-  padding: 8px;
-  margin-top: 5px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-form textarea {
-  resize: vertical;
-  min-height: 80px;
+form input:focus,
+form textarea:focus {
+  border-color: #aedd2b;
+  outline: none;
+  box-shadow: 0 0 6px rgba(174, 221, 43, 0.7);
 }
 
 form button {

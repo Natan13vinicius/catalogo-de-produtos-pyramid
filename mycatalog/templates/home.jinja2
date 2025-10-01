@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Catálogo de Produtos</title>
-    <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Catálogo de Produtos</title>
+  <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-    <h1>{{ message }}</h1>
-    <p style="text-align: center;">Bem-vindo ao sistema de gerenciamento de produtos.</p>
-    <div style="text-align: center;">
-        <a href="{{ request.route_url('list_products') }}" class="button">📦 Ver Produtos</a>
-        <a href="{{ request.route_url('add_product') }}" class="button">➕ Adicionar Produto</a>
+  <header>
+    <h1>Catálogo de Produtos</h1>
+    <nav>
+      <a href="{{ request.route_url('home') }}">Início</a>
+      <a href="{{ request.route_url('list_products') }}">Produtos</a>
+      <a href="{{ request.route_url('add_product') }}">Adicionar</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2 style="margin-bottom:10px;">{{ message }}</h2>
+    <p>Bem-vindo ao sistema de gerenciamento de produtos.</p>
+    <div style="margin-top:16px;">
+      <a class="btn" href="{{ request.route_url('list_products') }}">📦 Ver Produtos</a>
+      <a class="btn" href="{{ request.route_url('add_product') }}">➕ Adicionar Produto</a>
     </div>
+  </main>
+
+  <footer>
+    <small>Projeto acadêmico · Pyramid + SQLAlchemy</small>
+  </footer>
 </body>
 </html>
