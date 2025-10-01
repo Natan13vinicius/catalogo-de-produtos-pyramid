@@ -18,7 +18,6 @@ body {
 /* ====== HEADER ====== */
 header {
   background: linear-gradient(90deg, #000000, #aedd2b);
-text
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
@@ -27,6 +26,7 @@ text
 }
 
 header h1 {
+  color: white;
   font-size: 1.6rem;
   font-weight: bold;
 }
@@ -40,7 +40,7 @@ header nav a {
 }
 
 header nav a:hover {
-  color: #aedd2b;
+  color: #000;
   transform: scale(1.05);
 }
 
@@ -175,10 +175,8 @@ form button {
   cursor: pointer;
 }
 
-
 /* */
-body > main > form:nth-child(1){
+body > main > form:nth-child(1) {
   width: 90%;
-  display: flex
-;
+  display: flex;
 }
