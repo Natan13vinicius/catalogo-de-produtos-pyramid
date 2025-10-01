@@ -25,7 +25,6 @@
             <th>Nome</th>
             <th>Descrição</th>
             <th>Preço</th>
-            <th>Imagem</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -36,11 +35,7 @@
             <td>{{ product.name }}</td>
             <td style="text-align:left">{{ product.description }}</td>
             <td>R$ {{ "%.2f"|format(product.price) }}</td>
-            <td>
-              {% if product.image_path %}
-                <img src="{{ request.static_url('mycatalog:static/uploads/' ~ product.image_path) }}" alt="Imagem" />
-              {% else %}-{% endif %}
-            </td>
+           
             <td>
               <a class="btn" href="{{ request.route_url('edit_product', id=product.id) }}">✏️ Editar</a>
               <a class="btn btn-danger" href="{{ request.route_url('delete_product', id=product.id) }}">🗑️ Excluir</a>

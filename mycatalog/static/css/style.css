@@ -7,7 +7,7 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(90deg, #000000, #aedd2b);
+  background: linear-gradient(90deg, #aedd2b, #000000, #aedd2b);
   color: #000;
   line-height: 1.6;
   min-height: 100vh;
@@ -17,8 +17,8 @@ body {
 
 /* ====== HEADER ====== */
 header {
-  background: black;
-  color: #fff;
+  background: linear-gradient(90deg, #000000, #aedd2b);
+text
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
@@ -173,4 +173,12 @@ form textarea:focus {
 form button {
   margin-top: 15px;
   cursor: pointer;
+}
+
+
+/* */
+body > main > form:nth-child(1){
+  width: 90%;
+  display: flex
+;
 }
