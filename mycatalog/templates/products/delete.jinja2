@@ -6,26 +6,42 @@
   <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-  <header>
-    <h1>Excluir Produto</h1>
-    <nav>
-      <a href="{{ request.route_url('home') }}">Início</a>
-      <a href="{{ request.route_url('list_products') }}">Produtos</a>
-    </nav>
-  </header>
+<header>
+  <h1>Excluir Produto</h1>
+  <nav>
+    <a href="{{ request.route_url('home') }}">Início</a>
+    <a href="{{ request.route_url('list_products') }}">Lista</a>
+  </nav>
+</header>
 
-  <main>
-    <p>Tem certeza que deseja excluir o produto <strong>{{ product.name }}</strong> (ID {{ product.id }})?</p>
+<main>
+  {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+  {% endif %}
 
-    <form method="post" action="{{ request.route_url('delete_product', id=product.id) }}">
-      <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
-      <button class="btn btn-danger" type="submit">🗑️ Excluir</button>
-      <a class="btn" href="{{ request.route_url('list_products') }}">Cancelar</a>
-    </form>
-  </main>
+  {% if not product %}
+    <p>Produto não encontrado.</p>
+  {% else %}
+    <p>Tem certeza que deseja excluir o produto abaixo?</p>
 
-  <footer>
-    <small>Projeto acadêmico · Pyramid + SQLAlchemy</small>
-  </footer>
+    <div class="card">
+      <p><strong>ID:</strong> {{ product.id }}</p>
+      <p><strong>Nome:</strong> {{ product.name }}</p>
+      <p><strong>Descrição:</strong> {{ product.description }}</p>
+      <p><strong>Preço:</strong> R$ {{ '%.2f'|format(product.price) }}</p>
+    </div>
+
+   <form method="post" action="{{ request.route_url('delete_product', id=product.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
+
+  <p>Tem certeza que deseja excluir <strong>{{ product.name }}</strong>?</p>
+  <button class="btn btn-danger" type="submit">Excluir</button>
+  <a class="btn" href="{{ request.route_url('list_products') }}">Cancelar</a>
+</form>
+
+  {% endif %}
+</main>
+
+<footer>Projeto acadêmico • Pyramid + SQLAlchemy</footer>
 </body>
 </html>

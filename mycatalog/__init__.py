@@ -38,6 +38,9 @@ def main(global_config, **settings):
     # Suporte a templates Jinja2
     config.include("pyramid_jinja2")
 
+    # 🔹 NOVO: habilita commit/rollback automáticos por requisição
+    config.include("pyramid_tm")
+
     # Arquivos estáticos (CSS, imagens, etc.)
     config.add_static_view(name="static", path="mycatalog:static", cache_max_age=3600)
 

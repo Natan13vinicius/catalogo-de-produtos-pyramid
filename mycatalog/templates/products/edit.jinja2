@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Editar Produto</title>
   <link rel="stylesheet" href="{{ request.static_url('mycatalog:static/css/style.css') }}">
 </head>
 <body>
-  <header>
-    <h1>Editar Produto</h1>
-    <nav>
-      <a href="{{ request.route_url('home') }}">Início</a>
-      <a href="{{ request.route_url('list_products') }}">Produtos</a>
-    </nav>
-  </header>
+<header>
+  <h1>Editar Produto</h1>
+  <nav>
+    <a href="{{ request.route_url('home') }}">Início</a>
+    <a href="{{ request.route_url('list_products') }}">Lista</a>
+  </nav>
+</header>
 
-  <main>
-    <form method="post" action="{{ request.route_url('edit_product', id=product.id) }}">
-      <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
+<main>
+  {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+  {% endif %}
 
-      <label for="name">Nome:</label>
-      <input id="name" name="name" type="text" value="{{ product.name }}" required />
+  {% if not product %}
+    <p>Produto não encontrado.</p>
+  {% else %}
+  <form method="post" action="{{ request.route_url('edit_product', id=product.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
 
-      <label for="description">Descrição:</label>
-      <textarea id="description" name="description" required>{{ product.description }}</textarea>
+  <label>Nome</label>
+  <input name="name" required value="{{ product.name }}">
 
-      <label for="price">Preço:</label>
-      <input id="price" name="price" type="number" step="0.01" value="{{ '%.2f'|format(product.price) }}" required />
+  <label>Descrição</label>
+  <textarea name="description" required>{{ product.description }}</textarea>
 
-      
+  <label>Preço</label>
+  <input name="price" type="text" required value="{{ '%.2f'|format(product.price) }}">
 
-      <button class="btn" type="submit">Salvar alterações</button>
-      <a class="btn" href="{{ request.route_url('list_products') }}">↩ Voltar</a>
-    </form>
-  </main>
+  <label>Imagem (nome do arquivo)</label>
+  <input name="image_path" type="text" value="{{ product.image_path or '' }}">
 
-  <footer>
-    <small>Projeto acadêmico · Pyramid + SQLAlchemy</small>
-  </footer>
+  <button class="btn" type="submit">Salvar</button>
+</form>
+
+  {% endif %}
+</main>
+
+<footer>Projeto acadêmico • Pyramid + SQLAlchemy</footer>
 </body>
 </html>
